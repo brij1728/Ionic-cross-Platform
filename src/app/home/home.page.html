@@ -1,23 +1,28 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title> Blank </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item color="primary" lines="none" *ngFor="let item of [0, 1, 2]" [routerLink]="['/', 'detail', item]">
-      Item {{item}}
+    <ion-item
+      color="primary"
+      lines="none"
+      (click)="showModal(item)"
+      *ngFor="let item of items"
+      [routerLink]="['/', 'detail', item]"
+    >
+      <p>> {{item.name.first}} {{item.name.last}}</p>
+
       <ion-thumbnail slot="end">
-        <img src="https://www.ng-conf.org/wp-content/uploads/2017/01/Deb.jpg">
+        <img [src]="item.picture.thumbnail" />
       </ion-thumbnail>
-      <ion-thumbnail slot="start">
-        <img src="https://www.ng-conf.org/wp-content/uploads/2017/01/Deb.jpg">
-      </ion-thumbnail>
-     </ion-item>
+    </ion-item>
   </ion-list>
+
+  <ion-button (click)="showAlert()">Show Alert</ion-button>
+  <ion-button (click)="showModal()">Show Modal</ion-button>
 </ion-content>
 
 <ion-footer>
