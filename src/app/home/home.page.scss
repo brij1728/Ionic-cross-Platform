@@ -1,3 +1,14 @@
 ion-item {
- --min-height: 100px;
+  --min-height: 100px;
+}
+
+ion-title {
+  ion-icon {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+ion-col {
+  border: thin solid black
 }
