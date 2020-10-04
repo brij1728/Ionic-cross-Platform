@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Blank </ion-title>
+    <ion-title> Hello World <ion-icon name="play"> </ion-icon> </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,16 +13,20 @@
       *ngFor="let item of items"
       [routerLink]="['/', 'tabs', 'tab1', 'detail', item.id.value]"
     >
-      <p>> {{item.name.first}} {{item.name.last}}</p>
-
-      <ion-thumbnail slot="end">
+      <ion-thumbnail slot="start">
         <img [src]="item.picture.thumbnail" />
       </ion-thumbnail>
+
+      <p>{{item.name.first}} {{item.name.last}}</p>
     </ion-item>
   </ion-list>
 
+  <pre> {{location | json}}</pre>
+  <img [src]="photo" *ngIf="photo" />
+
+  <ion-button (click)="takePhoto()">take Photo</ion-button>
   <ion-button (click)="showAlert()">Show Alert</ion-button>
-  <ion-button (click)="showModal()">Show Modal</ion-button>
+  <!-- <ion-button (click)="showModal()">Show Modal</ion-button> -->
 </ion-content>
 
 <ion-footer>

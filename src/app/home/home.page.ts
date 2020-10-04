@@ -1,4 +1,5 @@
 import { ModalComponent } from "./../modal/modal.component";
+import { Plugins, CameraResultType, CameraSource } from "@capacitor/core";
 import { Component } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { AlertController, ModalController } from "@ionic/angular";
@@ -10,6 +11,8 @@ import { AlertController, ModalController } from "@ionic/angular";
 })
 export class HomePage {
   items = [];
+  photo: string;
+  location;
 
   constructor(
     private http: HttpClient,
@@ -18,7 +21,19 @@ export class HomePage {
   ) {}
 
   ngOnInit() {
-    console.log("onit fire");
+    const { GeoLocation } = Plugins;
+    GeoLocation.getCurrentPosition().then((res) => console.log(res));
+  }
+
+  async takePhoto() {
+    const { Camera } = Plugins;
+    const image = await Camera.getPhoto({
+      quality: 100,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Camera,
+    });
+    this.photo = image.dataUrl;
   }
 
   async showAlert() {
@@ -49,7 +64,7 @@ export class HomePage {
     modal.present();
   }
 
-  ionViewDidEnter() {
+  async ionViewDidEnter() {
     this.http
       .get("https://randomuser.me/api/")
       .subscribe((res: any) => (this.items = res.results));
